@@ -7,6 +7,7 @@
                  [org.clojure/spec.alpha "0.2.176"]
                  [org.clojure/data.csv "0.1.4"]
                  [clj-time "0.15.2"]
+                 [org.clojure/tools.cli "0.4.2"]
                  [expound "0.8.2"]]
 
   :main ^:skip-aot homework.cli.core
