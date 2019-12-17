@@ -1,36 +1,40 @@
 # homework
 
-FIXME: description
+This is a fun sample project I created as part of an interview process. The codebase contains three nested projects:
+
+1. A command line app that takes three file types (csv, pipe-delimited, space-delimited), parses records, sorts the records based on various fields, and displays the result to the console.  
+
+2. A common library containing the record specs, sorting functions, and date-time conversion helper functions.
+
+3. A RESTful API that takes in records and sorts them in various ways.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+I use lein-cloverage plugin to generate code-coverage. Add it to .lein profile.clj.
+
+```clojure_projects
+[lein-cloverage "1.1.2"]
+```
 
 ## Usage
 
-FIXME: explanation
+cd into cli, record, or api and run
+```
+lein cloverage
+```
+to generate code coverage for sources files in that sub-project.
 
-    $ java -jar homework-0.1.0-standalone.jar [args]
-
+cd into the cli directory and execute
+```
+lein run arg1 arg2 arg3
+```
 ## Options
 
 FIXME: listing of options this app accepts.
 
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
 ## License
 
-Copyright © 2019 FIXME
+Copyright © 2019 Jordan Calderwood
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
