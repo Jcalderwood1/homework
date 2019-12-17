@@ -1,0 +1,10 @@
+({:last-name "Oneil", :first-name "Caroline", :gender "female", :favorite-color "peach", :date-of-birth "6/22/1911"}
+ {:last-name "Odom", :first-name "Luke", :gender "female", :favorite-color "lavender", :date-of-birth "9/8/1920"}
+ {:last-name "Nunez", :first-name "Kylie", :gender "female", :favorite-color "carmine", :date-of-birth "2/3/1911"}
+ {:last-name "Mckay", :first-name "Christian", :gender "female", :favorite-color "periwinkle", :date-of-birth "3/26/1931"}
+ {:last-name "Kirkland", :first-name "Abigail", :gender "female", :favorite-color "pink", :date-of-birth "1/2/1910"}
+ {:last-name "Holland", :first-name "Maya", :gender "male", :favorite-color "ultramarine", :date-of-birth "2/2/1910"}
+ {:last-name "Hines", :first-name "Allison", :gender "female", :favorite-color "raspberry", :date-of-birth "2/2/1910"}
+ {:last-name "Craig", :first-name "Bryson", :gender "female", :favorite-color "gray", :date-of-birth "2/9/1910"}
+ {:last-name "Colon", :first-name "Ethan", :gender "male", :favorite-color "yellow", :date-of-birth "3/6/1911"}
+ {:last-name "Cervantes", :first-name "Harper", :gender "female", :favorite-color "erin", :date-of-birth "2/2/1910"})
