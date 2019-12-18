@@ -16,11 +16,21 @@
             [clojure.spec.alpha                :as s]
             [clojure.java.io                   :as io]))
 
-(s/def ::x int?)
+(s/def ::x string?)
 (s/def ::y int?)
 (s/def ::total int?)
-(s/def ::math-request (s/keys :req-un [::x ::y]))
-(s/def ::math-response (s/keys :req-un [::total]))
+(s/def ::record-request ::x)
+(s/def ::fn  string?)
+(s/def ::ln  string?)
+(s/def ::g   string?)
+(s/def ::fc  string?)
+(s/def ::dob string?)
+(s/def ::record (s/keys :req-un [::fn ::ln ::g ::fc ::dob]))
+(s/def ::record-response (s/keys :req-un [::record]))
+
+(defn my-handler [request]
+  {:status 201
+   :body {:record {:fn "fn" :ln "ln" :g "g" :fc "fc" :dob "dob"}}})
 
 (def app
   (ring/ring-handler
@@ -30,22 +40,14 @@
                :swagger {:info {:title "my-api"}}
                :handler (swagger/create-swagger-handler)}}]
 
-       ["/math"
-        {:swagger {:tags ["math"]}}
+       ["/api"
+        {:swagger {:tags ["records"]}}
 
-        ["/plus"
-         {:get {:summary "plus with spec query parameters"
-                :parameters {:query ::math-request}
-                :responses {200 {:body ::math-response}}
-                :handler (fn [{{{:keys [x y]} :query} :parameters}]
-                           {:status 200
-                            :body {:total (+ x y)}})}
-          :post {:summary "plus with spec body parameters"
-                 :parameters {:body ::math-request}
-                 :responses {200 {:body ::math-response}}
-                 :handler (fn [{{{:keys [x y]} :body} :parameters}]
-                            {:status 200
-                             :body {:total (+ x y)}})}}]]]
+        ["/records"
+          {:post {:summary "Post a single record"
+                  :parameters {:body ::record-request}
+                  :responses {201 {:body ::record-response}}
+                  :handler my-handler}}]]]
 
       {;:reitit.middleware/transform dev/print-request-diffs ;; pretty diffs
        :exception pretty/exception
@@ -76,9 +78,16 @@
                   :operationsSorter "alpha"}})
       (ring/create-default-handler))))
 
+(defonce server (jetty/run-jetty #'app {:port 3000 :join? false}))
+
 (defn start []
-  (jetty/run-jetty #'app {:port 3000, :join? false})
+  (.start server)
   (println "server running in port 3000"))
 
+(defn stop []
+  (.stop server)
+  (println "stopping server on port 3000"))
+
 (comment
-  (start))
+  (start)
+  (stop))
