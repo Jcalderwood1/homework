@@ -52,7 +52,7 @@
   "Entrypoint to cli interface"
   [& args]
   (let [{:keys [arguments options exit-message ok?]} (validate-args args)
-        records  (reduce concat (map io/file->record arguments))
+        records  (reduce concat (map io/file->records arguments))
         sort-key (:sort options)]
     (pprint/pprint arguments)
     (pprint/pprint options)

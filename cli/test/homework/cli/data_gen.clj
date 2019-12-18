@@ -10,9 +10,6 @@
   [filename separator quantity]
   (with-open [writer (io/writer (str "resources/" filename ".csv"))]
     (csv/write-csv writer
-      [["last-name" "first-name" "gender" "favorite-color" "date-of-birth"]]
-      :separator separator)
-    (csv/write-csv writer
       (map vals (gen/sample (s/gen :homework.spec/person) quantity))
       :separator separator)))
 

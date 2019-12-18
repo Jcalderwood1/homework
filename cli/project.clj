@@ -5,7 +5,6 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/spec.alpha "0.2.176"]
-                 [org.clojure/data.csv "0.1.4"]
                  [clj-time "0.15.2"]
                  [org.clojure/tools.cli "0.4.2"]
                  [expound "0.8.2"]]
@@ -20,4 +19,5 @@
                                   [org.clojure/spec.alpha "0.2.176"]
                                   [talltale "0.4.3"]
                                   [org.clojure/data.generators "0.1.2"]
-                                  [proto-repl "0.3.1"]]}})
+                                  [proto-repl "0.3.1"]
+                                  [org.clojure/data.csv "0.1.4"]]}})

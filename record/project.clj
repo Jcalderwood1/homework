@@ -6,7 +6,9 @@
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/spec.alpha "0.2.176"]
                  [clj-time "0.15.2"]
+                 [org.clojure/data.csv "0.1.4"]
                  [expound "0.8.2"]]
+
   :repl-options {:init-ns homework.record.sort}
   :profiles {:dev {:source-paths ["dev" "src" "test"]
                    :dependencies [[org.clojure/tools.namespace "0.2.11"]
