@@ -1,0 +1,31 @@
+REPL Instructions
+
+Code can be entered at the bottom and executed by pressing shift+enter.
+
+Try it now by typing (+ 1 1) in the bottom section and pressing shift+enter.
+
+Working in another Clojure file and sending forms to the REPL is the most efficient way to work. Use the following key bindings to send code to the REPL. See the settings for more keybindings.
+
+ctrl-alt-, then b
+Execute block. Finds the block of Clojure code your cursor is in and executes that.
+
+ctrl-alt-, s
+Executes the selection. Sends the selected text to the REPL.
+
+You can disable this help text in the settings.
+Atom Ink does not appear to be installed. Install it to get a better REPL experience.
+Starting REPL with lein in /Users/Jordan/Documents/clojure_projects/homework/api
+2019-12-18 17:03:18.147:INFO::main: Logging initialized @5875ms to org.eclipse.jetty.util.log.StdErrLog
+2019-12-18 17:03:22.039:INFO:oejs.Server:main: jetty-9.4.22.v20191022; built: 2019-10-22T13:37:13.455Z; git: b1e6b55512e008f7fbdf1cbea4ff8a6446d1073b; jvm 1.8.0_212-b04
+2019-12-18 17:03:22.092:INFO:oejs.AbstractConnector:main: Started ServerConnector@2f498e2{HTTP/1.1,[http/1.1]}{0.0.0.0:3000}
+2019-12-18 17:03:22.092:INFO:oejs.Server:main: Started @9819ms
+
+nREPL server started on port 56157 on host 127.0.0.1 - nrepl://127.0.0.1:56157
+Refreshing code...
+:reloading (homework.record.date homework.record.spec homework.record.parse homework.record.sort homework.api.core homework.api.server)
+2019-12-18 17:03:22.974:INFO:oejs.Server:nRepl-session-8cc6ed29-0df3-440e-af8a-899dc9fd3919: jetty-9.4.22.v20191022; built: 2019-10-22T13:37:13.455Z; git: b1e6b55512e008f7fbdf1cbea4ff8a6446d1073b; jvm 1.8.0_212-b04
+2019-12-18 17:03:22.977:INFO:oejs.AbstractConnector:nRepl-session-8cc6ed29-0df3-440e-af8a-899dc9fd3919: Stopped ServerConnector@2c648a88{HTTP/1.1,[http/1.1]}{0.0.0.0:3000}
+:error-while-loading homework.api.server
+Syntax error compiling at (homework/api/server.clj:74:1).
+Refresh complete
+--------------------

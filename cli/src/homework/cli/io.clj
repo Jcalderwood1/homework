@@ -10,7 +10,9 @@
           separator (parse/separator-type (first lines))]
       (->> lines
         (map #(parse/line->fields % separator))
-        (map #(parse/fields->record %))))))
+        (map #(parse/fields->record %))
+        (map parse/validate-record)
+        (remove nil?)))))
 
 (comment
   (parse/validate-record {:first-name "ad" :last-name "as" :gender "female" :favorite-color "asd" :date-of-birth "1/13/2020"})

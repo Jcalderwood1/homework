@@ -1,4 +1,4 @@
-(ns homework.cli.data-gen
+(ns homework.record.data-gen
   (:require [clojure.data.csv        :as csv]
             [clojure.java.io         :as io]
             [clojure.spec.alpha      :as s]
@@ -12,6 +12,10 @@
     (csv/write-csv writer
       (map vals (gen/sample (s/gen :homework.spec/person) quantity))
       :separator separator)))
+
+(defn generate-test-db
+  []
+  (gen/sample (s/gen :homework.record.spec/db)))
 
 (comment
   (do
