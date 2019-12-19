@@ -15,7 +15,6 @@
         (remove nil?)))))
 
 (comment
-  (parse/validate-record {:first-name "ad" :last-name "as" :gender "female" :favorite-color "asd" :date-of-birth "1/13/2020"})
   (def files ["resources/test.csv" "resources/test1.csv" "resources/test2.csv"])
   (count (reduce concat (map file->records files)))
   (file->records "resources/test.csv"))

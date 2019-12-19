@@ -53,4 +53,4 @@
 (s/def ::record (s/keys :req-un [::last-name ::first-name ::gender ::favorite-color ::date-of-birth]))
 
 ;; db spec
-(s/def ::db (s/coll-of ::record :into []))
+(s/def ::db (s/coll-of ::record :into '()))
