@@ -14,8 +14,9 @@
       :separator separator)))
 
 (defn generate-test-db
+  "Creates a vector of records representing the state of the db after processes POST requests"
   []
-  (gen/sample (s/gen :homework.record.spec/db)))
+  (gen/generate (s/gen :homework.record.spec/db)))
 
 (comment
   (do

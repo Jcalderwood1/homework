@@ -56,8 +56,6 @@
 
   (app {:request-method :post
         :uri "/records"
-        :body (java.io.ByteArrayInputStream. (.getBytes body-string))
-        :scheme :http
-        :headers {}})
+        :body (java.io.ByteArrayInputStream. (.getBytes body-string))})
 
   (deref api/db))

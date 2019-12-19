@@ -37,9 +37,7 @@
 
 (defn wrap-parse-csv [handler]
   (fn [{:keys [body] :as request}]
-    (prn request)
     (let [body-string (slurp body :encoding "UTF-8")
-          _ (prn body-string)
           separator   (parse/separator-type body-string)
           fields      (parse/line->fields   body-string separator)
           record      (parse/fields->record fields)]

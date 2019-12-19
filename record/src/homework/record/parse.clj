@@ -31,3 +31,7 @@
             (binding [s/*explain-out* (expound/custom-printer {:show-valid-values? true :print-specs? false})]
               (s/explain ::spec/record record)))
           record))
+
+(comment
+  (validate-record {:first-name "ad" :last-name "as" :gender "female" :favorite-color "asd" :date-of-birth "1/13/2020"})
+  (separator-type "adsf24tqarasdf | asdfasdf ,"))
