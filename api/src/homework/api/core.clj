@@ -44,5 +44,6 @@
       (handler (assoc request :data record)))))
 
 (comment
-  (post-record {:body {:data "Kirkland | Abigail | female | pink | 1/2/1910"}})
-  (reset! db (gen/generate-test-db)))
+  (create-record {:body {:data "Kirkland | Abigail | female | pink | 1/2/1910"}})
+  (reset! db (gen/generate-test-db))
+  (reset! db '()))

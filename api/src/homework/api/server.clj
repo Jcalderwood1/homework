@@ -58,4 +58,7 @@
         :uri "/records"
         :body (java.io.ByteArrayInputStream. (.getBytes body-string))})
 
+  (app {:request-method :get
+        :uri "/records/gender"})
+
   (deref api/db))

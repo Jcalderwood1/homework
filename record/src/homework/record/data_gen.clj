@@ -13,10 +13,9 @@
       (map vals (gen/sample (s/gen :homework.spec/person) quantity))
       :separator separator)))
 
-(defn generate-test-db
-  "Creates a vector of records representing the state of the db after processes POST requests"
-  []
-  (gen/generate (s/gen :homework.record.spec/db)))
+(defn generate-test-db [] (gen/generate (s/gen :homework.record.spec/db)))
+(defn gen-record       [] (gen/generate (s/gen :homework.record.spec/record)))
+(defn gen-data-line    [] (apply str (interpose " | " (vals (gen-record)))))
 
 (comment
   (do
