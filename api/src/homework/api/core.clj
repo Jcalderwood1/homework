@@ -43,6 +43,8 @@
           record      (parse/fields->record fields)]
       (handler (assoc request :data record)))))
 
+(defn test-db [] (reset! db (gen/generate-test-db)))
+
 (comment
   (create-record {:body {:data "Kirkland | Abigail | female | pink | 1/2/1910"}})
   (reset! db (gen/generate-test-db))

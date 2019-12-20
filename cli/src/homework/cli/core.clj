@@ -7,7 +7,7 @@
               [clojure.tools.cli    :refer  [parse-opts]]))
 
 (def cli-options
-  [["-s" "--sort " "Sort-by criteria"
+  [["-s" "--sort " "accepts one of [:gender :last-name :date-of-birth]"
     :default :gender
     :parse-fn #(keyword %)
     :validate [#(contains? #{:gender :last-name :date-of-birth} %) "Options are gender last-name date-of-birth"]]
@@ -16,7 +16,7 @@
 (defn usage [options-summary]
   (->> ["A simple cli to parse and sort records."
         ""
-        "Usage: lein run file1 file2 file3 [options]"
+        "Usage: lein run file1 file2 file3 -s :last-name"
         ""
         "Options:"
         options-summary
@@ -32,16 +32,22 @@
   should exit (with a error message, and optional ok status), or a map
   indicating the action the program should take and the options provided."
   [args]
-  (let [{:keys [arguments options errors summary]} (parse-opts args cli-options)]
+  (let [{:keys [arguments options errors summary]} (parse-opts args cli-options)
+        invalid-files (map io/file-exists? arguments)]
     (cond
-      (:help options) ; help => exit OK with usage summary
+      (:help options)
       {:exit-message (usage summary) :ok? true}
-      errors ; errors => exit with description of errors
+
+      errors
       {:exit-message (error-msg errors)}
-      ;; custom validation on arguments
+
+      (some some? invalid-files)
+      {:exit-message (error-msg (remove nil? invalid-files))}
+
       (<= 1 (count arguments))
       {:arguments arguments :options options}
-      :else ; failed custom validation => exit with usage summary
+
+      :else
       {:exit-message (usage summary)})))
 
 (defn exit [status msg]
@@ -51,15 +57,14 @@
 (defn -main
   "Entrypoint to cli interface"
   [& args]
-  (let [{:keys [arguments options exit-message ok?]} (validate-args args)
-        records  (reduce concat (map io/file->records arguments))
-        sort-key (:sort options)]
-    (pprint/pprint arguments)
-    (pprint/pprint options)
-    (pprint/pprint exit-message)
-    (if exit-message
+  (let [{:keys [arguments options exit-message ok?]} (validate-args args)]
+    (when exit-message
       (exit (if ok? 0 1) exit-message))
-    (pprint/print-table (sort/sort-records {:sort-by sort-key :records records}))))
+    (let [records  (reduce concat (map io/file->records arguments))
+          sort-key (:sort options)]
+      (when (some nil? records)
+        (exit 1 "Invalid records encountered during parse. Exiting..."))
+      (pprint/print-table (sort/sort-records {:sort-by sort-key :records records})))))
 
 (comment
   (-main "resources/test.csv" "resources/test1.csv" "resources/test2.csv" "-s" "date-of-birth")
