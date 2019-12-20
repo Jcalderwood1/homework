@@ -4,15 +4,24 @@
 > lein repl
 (start)
 ```
-
+You can also populate the db with sample data to test out sorting:
+```clj
+(test-db)
 ```
-http POST localhost:3000/record "LastName | FirstName | Gender | FavoriteColor | DateOfBirth"
-http POST localhost:3000/record "LastName, FirstName, Gender, FavoriteColor, DateOfBirth"
-http POST localhost:3000/record "LastName FirstName Gender FavoriteColor DateOfBirth"
+This will replace the db with the test data, so make sure to use this command before posting data you want to test.
 
-http GET  localhost:3000/records?sort=gender
-http GET  localhost:3000/records?sort=gender
-http GET  localhost:3000/records?sort=gender
+## Swagger UI
+Head over to localhost:3000 to play around with the server through the Swagger UI!
+
+## Postman, cURL etc:
+```
+http POST localhost:3000/records "LastName | FirstName | Gender | FavoriteColor | DateOfBirth"
+http POST localhost:3000/records "LastName, FirstName, Gender, FavoriteColor, DateOfBirth"
+http POST localhost:3000/records "LastName FirstName Gender FavoriteColor DateOfBirth"
+
+http GET  localhost:3000/records/gender
+http GET  localhost:3000/records/birthdate
+http GET  localhost:3000/records/name
 ```
 
 ## License
