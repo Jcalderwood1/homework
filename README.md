@@ -8,11 +8,13 @@ This is a fun sample project I created as part of an interview process. The code
 
 3. A RESTful API that takes in records and sorts them according to name, birthdate, or gender.
 
+See the README.md in each sub-project for usage info.
+
 ## Libraries
 
 ### CLI
 
-For the CLI I used clojure.tools.cli, which provides an simple, intuitive API for configuring a program quickly and easily.
+I used clojure.tools.cli to create the command line app. tools.cli provides a simple, intuitive API for configuring args, options, and input validation.
 
 ### Record Parsing and Sorting
 
@@ -35,7 +37,9 @@ Should be a valid date of format M/D/YYYY between 1900-2099
 -------------------------
 Detected 1 error
 ```
-Thats not a real date, silly.
+Thats not a real date, silly!
+
+I also used a nice little library called jgrodziski/talltale to generate sample first names, last names, and colors. 
 
 ### RESTful API
 
@@ -51,12 +55,12 @@ See the api/README.md for usage info.
 
 ## Testing and Code Coverage
 
-To run tests
+To run tests cd into cli, api, or record and 
 ```
 lein test
 ```
 
-I use lein-cloverage plugin to generate code-coverage. Add it to .lein profile.clj.
+I used lein-cloverage plugin to generate code-coverage. Add it to .lein profile.clj.
 
 ```clojure_projects
 [lein-cloverage "1.1.2"]
