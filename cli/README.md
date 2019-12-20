@@ -1,44 +1,48 @@
-# homework
+# homework CLI
 
-FIXME: description
+The homework cli parses records from three file types, sorts them
+according to a given field name, and prints them to the console.
 
-## Installation
+The supported file types are:
 
-Download from http://example.com/FIXME.
+1.	The pipe-delimited
+```
+LastName | FirstName | Gender | FavoriteColor | DateOfBirth
+```
+2.	The comma-delimited
+```
+LastName, FirstName, Gender, FavoriteColor, DateOfBirth
+```
+3.	The space-delimited
+```
+LastName FirstName Gender FavoriteColor DateOfBirth
+```
+
+The records can be sorted by passing in one of the following field names
+after the -s or --sort flags:
+```
+last-name
+gender
+date-of-birth
+```
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar homework-0.1.0-standalone.jar [args]
+```
+lein run file1 file2 file3 etc... -s last-name
+```
 
 ## Options
 
-FIXME: listing of options this app accepts.
+For usage info run:
+```
+lein run -- -h
+```
+Options:
+  -s, --sort   :gender  accepts one of [:gender :last-name :date-of-birth]
+  -h, --help
 
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
-Copyright © 2019 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+Copyright © 2019 Jordan Calderwood

@@ -47,6 +47,8 @@
 (defn start []
   (jetty/run-jetty #'app {:port 3000, :join? false}))
 
+(defn test-db [] (api/test-db))
+
 (comment
   (def server (start))
   (.stop server)
@@ -59,6 +61,4 @@
         :body (java.io.ByteArrayInputStream. (.getBytes body-string))})
 
   (app {:request-method :get
-        :uri "/records/gender"})
-
-  (deref api/db))
+        :uri "/records/gender"}))
