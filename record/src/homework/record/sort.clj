@@ -1,6 +1,5 @@
 (ns homework.record.sort
   (:require [homework.record.date :as date]
-            [clojure.pprint       :as pprint]
             [clj-time.core        :as t]))
 
 (defmulti sort-records (fn [db] (:sort-by db)))
