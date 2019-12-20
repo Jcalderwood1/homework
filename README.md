@@ -49,7 +49,8 @@ The folks over at Metosin are constantly blowing my mind with their amazing open
 
 I used metosin/reitit for routing, middleware, content-negotiation, and Swagger UI. Reitit allows you to choose ring-style middlewares, or pedestal interceptor model, and others.
 
-I went for the ring flavor of reitit, which I found to be a pleasure to work with.
+I went for the ring flavor of reitit, which I found to be a pleasure to work with. I also configured a Swagger UI which runs on 
+localhost:3000 and allows you to test out the running server. Cool! Thanks, Metosin!
 
 See the api/README.md for usage info.
 
