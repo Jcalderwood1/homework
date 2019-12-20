@@ -1,11 +1,12 @@
 (ns homework.api.server
   (:require [clojure.spec.alpha                :as s]
+            [reitit.coercion.spec]
             [reitit.ring                       :as ring]
             [reitit.swagger                    :as swagger]
             [reitit.swagger-ui                 :as swagger-ui]
             [ring.adapter.jetty                :as jetty]
             [homework.api.core                 :as api]
-            [homework.record.spec              :as recspec]
+            [homework.record.spec              :as rspec]
             [homework.record.parse             :as parse]
             [reitit.ring.middleware.muuntaja   :as muuntaja]
             [muuntaja.core                     :as m]))
@@ -13,26 +14,33 @@
 (def routes
   [["/swagger.json"
      {:get {:no-doc true
-            :swagger {:info {:title "my-api"}}
+            :swagger {:info {:title "Homework Records API"}}
             :handler (swagger/create-swagger-handler)}}]
 
    ["/records"
     {:post {:handler api/create-record
-            :middleware [api/wrap-parse-csv]}}]
+            :middleware [api/wrap-parse-csv]
+            :summary "Create a record"
+            :parameters {:body string?}
+            :responses {201 {:body :homework.record.spec/record}}}}]
 
    ["/records/gender"
-      {:get {:handler api/records-by-gender}}]
+      {:get {:handler api/records-by-gender
+             :summary "Sort by gender, females then males, last name ascending"}}]
 
    ["/records/birthdate"
-      {:get {:handler api/records-by-birthdate}}]
+      {:get {:handler api/records-by-birthdate
+             :summary "Sort by date of birth ascending"}}]
 
    ["/records/name"
-      {:get {:handler api/records-by-lastname}}]])
+      {:get {:handler api/records-by-lastname
+             :summary "Sort by last name descending"}}]])
 
 (def app
   (ring/ring-handler
     (ring/router routes
-      {:data {:muuntaja m/instance
+      {:data {:coercion reitit.coercion.spec/coercion
+              :muuntaja m/instance
               :middleware [swagger/swagger-feature
                            muuntaja/format-negotiate-middleware
                            muuntaja/format-response-middleware]}})
