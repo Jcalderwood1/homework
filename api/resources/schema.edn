@@ -1,0 +1,15 @@
+{:enums
+ {:gender_options {:values [:male :female]}
+  :sort_criteria  {:values [:gender :date_of_birth :last_name]}}
+
+ :objects
+ {:record {:fields {:last_name      {:type String}
+                    :first_name     {:type String}
+                    :gender         {:type :gender_options}
+                    :favorite_color {:type String}
+                    :date_of_birth  {:type String}}}}
+
+ :queries
+ {:records {:type    (list :record)
+            :args    {:sort_by {:type :sort_criteria}}
+            :resolve :get-records}}}

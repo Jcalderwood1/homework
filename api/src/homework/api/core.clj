@@ -1,12 +1,35 @@
 (ns homework.api.core
-    (:require [clojure.spec.alpha       :as s]
-              [homework.record.parse    :as parse]
-              [homework.record.spec     :as spec]
-              [homework.record.sort     :as sort]
-              [homework.record.data-gen :as gen]))
+  (:require [clojure.spec.alpha             :as    s]
+            [clojure.edn                    :as    edn]
+            [com.walmartlabs.lacinia.util   :refer [attach-resolvers]]
+            [com.walmartlabs.lacinia        :refer [execute]]
+            [com.walmartlabs.lacinia.schema :as    schema]
+            [homework.record.parse          :as    parse]
+            [homework.record.spec           :as    spec]
+            [homework.record.sort           :as    sort]
+            [homework.record.db             :refer [db]]
+            [homework.record.data-gen       :as    gen]))
 
-(def db (atom []))
+;; graphql
+(def record-resolvers
+  {:get-records (fn [ctx {:keys [sort_by]} val]
+                  (sort/sort-records sort_by))})
 
+(def record-schema
+  (-> "schema.edn"
+      clojure.java.io/resource
+      slurp
+      edn/read-string
+      (attach-resolvers record-resolvers)
+      (schema/compile
+       {:default-field-resolver
+        schema/hyphenating-default-field-resolver})))
+
+(defn graphql [{:keys [data]}]
+  {:status 200
+   :body (execute record-schema data nil nil)})
+
+;; REST api handlers
 (defn create-record [request]
   (let [record (-> request :data)]
     (if (s/valid? ::spec/record record)
@@ -20,20 +43,17 @@
 (defn records-by-gender [request]
   {:status 200
    :headers {}
-   :body (sort/sort-records {:sort-by :gender
-                             :records @db})})
+   :body (sort/sort-records :gender)})
 
 (defn records-by-birthdate [request]
   {:status 200
    :headers {}
-   :body (sort/sort-records {:sort-by :date-of-birth
-                             :records @db})})
+   :body (sort/sort-records :date-of-birth)})
 
 (defn records-by-lastname [request]
   {:status 200
    :headers {}
-   :body (sort/sort-records {:sort-by :last-name
-                             :records @db})})
+   :body (sort/sort-records :last-name)})
 
 (defn wrap-parse-csv [handler]
   (fn [{:keys [body] :as request}]
@@ -43,9 +63,8 @@
           record      (parse/fields->record fields)]
       (handler (assoc request :data record)))))
 
-(defn test-db [] (reset! db (gen/generate-test-db)))
+(defn wrap-gql-string [handler]
+  (fn [{:keys [body] :as request}]
+    (handler (assoc request :data (slurp body :encoding "UTF-8")))))
 
-(comment
-  (create-record {:body {:data "Kirkland | Abigail | female | pink | 1/2/1910"}})
-  (reset! db (gen/generate-test-db))
-  (reset! db '()))
+(def test-db (reset! db (gen/generate-test-db)))
