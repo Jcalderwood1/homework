@@ -1,6 +1,6 @@
 # homework
 
-This is a fun sample project I created as part of an interview process. The codebase contains three nested projects:
+This is a fun sample project I created in clojure(script). The codebase contains three nested projects:
 
 1. A command line app that takes in three file types (csv, pipe-delimited, space-delimited), parses records, sorts the records based on various fields, and displays the result to the console.  
 
